@@ -20,16 +20,17 @@
 #else
 
 static inline size_t fft_clz(size_t n) {
-  size_t count = INTBITS(size_t) / 2;
-  size_t half = count / 2;
-  while (half) {
-    if (n >> count)
-      count -= half;
-    else
-      count += half;
-    half >> 1;
-  }
+  size_t count = 1;
+  size_t half = INTBITS(size_t) / 2;
+  do {
+    while (!(n >> half))
+      half >>= 1;
+    n >>= half;
+    count += half;
+  } while (half >>= 1);
+  return INTBITS(size_t) - count;
 }
+
 
 #define likely(expr)    (expr)
 #define unlikely(expr)  (expr)
