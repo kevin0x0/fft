@@ -1,5 +1,5 @@
 CC = gcc
-OPTIMIZE =
+OPTIMIZE = -O3
 DEBUG = -g
 AR = ar rcs
 
@@ -22,4 +22,4 @@ testfft: test/test.c libfft.a
 .PHONY: clean
 
 clean:
-	$(RM) fft.o libfft.a
+	$(RM) fft.o libfft.a *.exe
